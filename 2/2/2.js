@@ -18,7 +18,8 @@
 Массив initialData должен использоваться для начальной загрузки данных 
 при запуске вашего приложения.
 
-Каждый отзыв должен иметь уникальное id, для упрощения, используем `Date.now()`.
+Каждый отзыв, как и продукт, должен иметь уникальное id, для упрощения, используем 
+`Date.now()`.
 
 ВНИМАНИЕ! Если вы не проходили на курсе работу с DOM, то можно это задание не 
 делать, пока рано.
@@ -26,6 +27,7 @@
 
 const initialData = [
   {
+    id: Date.now(),
     product: "Apple iPhone 13",
     reviews: [
       {
@@ -39,6 +41,7 @@ const initialData = [
     ],
   },
   {
+    id: Date.now(),
     product: "Samsung Galaxy Z Fold 3",
     reviews: [
       {
@@ -48,6 +51,7 @@ const initialData = [
     ],
   },
   {
+    id: Date.now(),
     product: "Sony PlayStation 5",
     reviews: [
       {
@@ -57,58 +61,3 @@ const initialData = [
     ],
   },
 ];
-
-const mainDiv = document.querySelector(".center");
-
-function seeData() {
-  for (const index in initialData) {
-    const titleProduct = document.createElement("h1");
-    titleProduct.innerText = `${initialData[index].product}`;
-    mainDiv.appendChild(titleProduct);
-
-    const tempElem = initialData[index].reviews;
-
-    for (const el in tempElem) {
-      const feedback = document.createElement("div");
-      feedback.classList.add("feedback");
-      feedback.innerText = `${tempElem[el].text}`;
-      mainDiv.appendChild(feedback);
-    }
-
-    const inputElem = document.createElement("input");
-    inputElem.classList.add("inputElem");
-    mainDiv.appendChild(inputElem);
-
-    const buttonElem = document.createElement("button");
-    buttonElem.classList.add("buttonElem");
-    buttonElem.innerText = "Добавить отзыв";
-    mainDiv.appendChild(buttonElem);
-  }
-}
-
-seeData();
-
-const buttons = document.querySelectorAll(".buttonElem");
-const inputs = document.querySelectorAll(".inputElem");
-
-for (let i = 0; i < buttons.length; i++) {
-  buttons[i].addEventListener("click", () => {
-    const text = inputs[i].value;
-
-    try {
-      if (text.length < 10 && text.length > 500) {
-        throw new Error("скорректируйте текст");
-      }
-
-      const tempElemNew = initialData[i].reviews;
-      tempElemNew.push({ id: Date.now(), text: text });
-
-      const deleteElement = document.querySelector(".center");
-      deleteElement.innerHTML = "";
-
-      seeData();
-    } catch (error) {
-      console.log(error.message);
-    }
-  });
-}
