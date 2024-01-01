@@ -37,6 +37,16 @@ for (let i = 0; i < feedbackListBtnEl.length; i++) {
   });
 }
 
+document.querySelector(".feedbackList").onclick = function (e) {
+  const btn = e.target.closest(".delete-feedback");
+  if (!btn) {
+    return;
+  }
+
+  btn.parentElement.remove();
+  btn.closest("li").remove();
+};
+
 function changePage() {
   window.open("feedback.html", "_self");
 }
