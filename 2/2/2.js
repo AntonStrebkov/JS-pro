@@ -40,6 +40,7 @@ const initialData = [
       },
     ],
   },
+
   {
     id: Date.now(),
     product: "Samsung Galaxy Z Fold 3",
